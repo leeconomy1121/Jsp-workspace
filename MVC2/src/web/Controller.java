@@ -11,6 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	public void destroy() {
+		// 서블릿 종료 시 한 번만 실행
+		super.destroy();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		// 서블릿이 생성될 때 한 번만실행
+		super.init();
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		
