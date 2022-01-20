@@ -6,12 +6,17 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+// DB 연결을 도와주는 클래스
 public class JDBCUtils {
 	 // demo 데이터베이스 , useSSL=false : SSL 인증을 사용하지 않음, 
     private static String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false";
     private static String jdbcUsername = "root";
     private static String jdbcPassword = "1234";
+    
+//    연결 테스트 성공!
+//    public static void main(String[] args) {
+//    	Connection conn = getConnection() ;
+//	}
     
     public static Connection getConnection() {
     	Connection conn = null;
@@ -21,10 +26,13 @@ public class JDBCUtils {
 			conn = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword); // 1
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 클래스 못 찾음");
+			return null;
 		} catch (SQLException e) {
-			System.out.println("SQL 에러");			
+			System.out.println("SQL 에러");
+			return null;
 		}
     	// DB연결 성공
+    	System.out.println("연결 성공!");
     	return conn; // DB에 연결하여 커넥션을 받아옴
     }
     
