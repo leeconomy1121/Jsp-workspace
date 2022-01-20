@@ -13,39 +13,30 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="<%=request.getContextPath() %>/css/style.css"
     />
-    <title>유저 등록</title>
+    <title>로그인</title>
   </head>
   <body>
     <jsp:include page="../common/header.jsp" />
     <!-- navbar 끝 -->
     <!-- 본문 -->
     <div class="container">
-      <h2>유저 등록</h2>
+      <h2>로그인</h2>
       <div class="col-md-6">
         <div class="alert alert-success center" role="alert">
-          <p>${MESSAGE}</p>
+          <p><%=session.getAttribute("message") %></p>
         </div>
-        <form action="<%=request.getContextPath() %>/register" method="post">
+        <form action="<%=request.getContextPath() %>/login" method="post">
           <div class="form-group">
-            <label for="firstName">성 :</label>
-            <input type="text" class="form-control" name="firstName" required />
-          </div>
-          <div class="form-group">
-            <label for="lastName">이름 :</label>
-            <input type="text" class="form-control" name="lastName" required />
-          </div>
-          <div class="form-group">
-            <label for="userName">아이디 :</label>
-            <input type="text" class="form-control" name="userName" required />
+            <label for="username">유저 이름 :</label>
+            <input type="text" class="form-control" name="username"
+            value="<%=session.getAttribute("user") %>" required />
           </div>
           <div class="form-group">
             <label for="password">비밀번호 :</label>
             <input type="text" class="form-control" name="password" required />
           </div>
           <div class="form-group mt-3">
-            <button type="submit" class="btn btn-outline-success">
-              가입하기
-            </button>
+            <button type="submit" class="btn btn-outline-danger">로그인</button>
           </div>
         </form>
       </div>
