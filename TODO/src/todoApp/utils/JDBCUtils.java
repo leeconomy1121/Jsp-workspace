@@ -38,10 +38,10 @@ public class JDBCUtils {
     
     // 자바 날짜를 SQL 날짜로 변경
     public static Date getSQLDate(LocalDate date) {
-		return java.sql.Date.valueOf(date);
+    	return java.sql.Date.valueOf(date);
     }
     // SQL 날짜를 자바 날짜로 변경
-    public static LocalDate getUtildDate(Date sqlDate) {
+    public static LocalDate getUtilDate(Date sqlDate) {
     	return sqlDate.toLocalDate();
     }
     
