@@ -15,7 +15,7 @@ import todoApp.dao.TodoDaoImpl;
 import todoApp.model.Todo;
 
 // 서블릿이 기본"/"주소이면 다른 서블릿 "/register", /login" 등을 제외한 모든 요청이 여기에서 처리
-@WebServlet("/")
+@WebServlet("/todos")
 public class TodoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -31,25 +31,25 @@ public class TodoController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 요청 주소가 localhost:8900/TODO/new => "/new" 가 action의 값
-		String action = request.getServletPath();
+		String action = request.getParameter("action");
 		
 		switch(action) {
-		case "/new":
+		case "new":
 			showNewForm(request, response);
 			break;
-		case "/insert":
+		case "insert":
 			insertTodo(request, response);
 			break;
-		case "/delete":
+		case "delete":
 			deleteTodo(request, response);
 			break;
-		case "/edit":
+		case "edit":
 			showEditForm(request, response);
 			break;
-		case "/update":
+		case "update":
 			updateTodo(request, response);
 			break;
-		case "/list": //localhost:8090/TODO/list
+		case "list": //localhost:8090/TODO/todos/list
 			listTodo(request, response);
 			break;
 		default: // 요청 주소가 기본 또는 잘못 되었을 경우 로그인 페이지로 이동
@@ -60,8 +60,9 @@ public class TodoController extends HttpServlet {
 		
 	}
 
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-form.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
