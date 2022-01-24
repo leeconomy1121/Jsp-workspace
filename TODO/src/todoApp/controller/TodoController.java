@@ -1,6 +1,8 @@
 package todoApp.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import todoApp.dao.TodoDao;
 import todoApp.dao.TodoDaoImpl;
@@ -37,7 +40,7 @@ public class TodoController extends HttpServlet {
 		case "new":
 			showNewForm(request, response);
 			break;
-		case "insert":
+		case "post":
 			insertTodo(request, response);
 			break;
 		case "delete":
@@ -66,8 +69,22 @@ public class TodoController extends HttpServlet {
 		
 	}
 
-	private void insertTodo(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void insertTodo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 입력한 값들을 받아서 DB todos 테이블에 저장
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		
+		String title = request.getParameter("title");
+		String username = (String)session.getAttribute("username");
+		String description = request.getParameter("description");
+		LocalDate targetDate = LocalDate.parse(request.getParameter("targetDate"));
+		boolean isDone = Boolean.valueOf(request.getParameter("isDone"));
+		
+		Todo newTodo = new Todo(title, username, description, targetDate, isDone);
+		todoDAO.insertTodo(newTodo);
+		
+		response.sendRedirect("todos?action=list"); // 새 할 일을 저장 후에 리스트 페이지로 이동
 		
 	}
 
@@ -76,8 +93,13 @@ public class TodoController extends HttpServlet {
 		
 	}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id")); // id를 받음
+		Todo theTodo = todoDAO.selectTodo(id);
+		// 수정할 todo 객체를 같이 보냄
+		request.setAttribute("todo", theTodo);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-form.jsp");
+		dispatcher.forward(request, response);
 		
 	}
 
