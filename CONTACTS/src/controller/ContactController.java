@@ -76,9 +76,19 @@ public class ContactController extends HttpServlet {
 
 	}
 
-	private void save(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-
+	private void save(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Contact contact = new Contact();
+		
+		contact.setName(req.getParameter("name"));
+		contact.setEmail(req.getParameter("email"));
+		contact.setPhone(req.getParameter("phone"));
+		
+		boolean inSaved = contactDao.save(contact); // true면 저장완료
+		
+		if(inSaved)
+			System.out.println("입력 완료!");
+		
+		list(req, resp); // 다시 리스트 화면 출력
 	}
 
 	@Override

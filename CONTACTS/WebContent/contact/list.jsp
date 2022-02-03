@@ -55,7 +55,7 @@
 	                    <span aria-hidden="true">&times;</span>
 	                </button>
 	            </div>
-	            <form autocomplete="off">
+	            <form autocomplete="off"  method="post">
 		            <div class="modal-body">
 	                	<div class="form-group">
 		                    <label for="name">name</label>
@@ -112,6 +112,6 @@
 	<script>
 		$('.nav-link').removeClass('active');
 		$('#m-contacts').addClass('active');
-		var path = '<%= request.getContextPath() %>';
+		const path = '<%= request.getContextPath() %>';
 	</script>
 	<script src="assets/js/contact.js"></script>
