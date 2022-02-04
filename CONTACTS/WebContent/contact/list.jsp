@@ -55,7 +55,7 @@
 	                    <span aria-hidden="true">&times;</span>
 	                </button>
 	            </div>
-	            <form autocomplete="off"  method="post">
+	            <form id="add-update" autocomplete="off">
 		            <div class="modal-body">
 	                	<div class="form-group">
 		                    <label for="name">name</label>
@@ -80,7 +80,7 @@
 	        </div>
 	    </div>
 	</div>
-    
+    <%-- 삭제 모달 창 --%>
     <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
