@@ -22,7 +22,7 @@ public class LoginDao {
 	
 	public boolean validate(LoginBean loginBean) {
 		boolean status = false;
-		String sql = "SELECT * FROM customer WHERE customerID = ? and customerPassword = ?";
+		String sql = "SELECT * FROM customer WHERE id = ? and password = ?";
 		
 		
 		try {
@@ -30,12 +30,14 @@ public class LoginDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, loginBean.getCustomerID());
 			pstmt.setString(2, loginBean.getCustomerPassword());
+			System.out.println(rs);
+			
 			rs = pstmt.executeQuery();
 			
 			status = rs.next();
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("SQL 에러");
 			
 		} finally {
 			closeAll();

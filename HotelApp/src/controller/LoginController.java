@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,7 @@ public class LoginController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
 		
 	}
@@ -45,20 +46,20 @@ public class LoginController extends HttpServlet {
 		loginBean.setCustomerID(customerID);
 		loginBean.setCustomerPassword(customerPassword);
 		
-		if( loginDao.validate(loginBean) ) {
-			System.out.println("로그인 성공!");
-			HttpSession session = request.getSession();
-			session.setAttribute("customerID", customerID);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
-			dispatcher.forward(request, response);			
-		} 
-		else { // 계정 없음 로그인 실패
-			System.out.println("로그인 실패!");
-			request.setAttribute("id", customerID);   //유저네임은 다시 보냄
-			request.setAttribute("message", "로그인 실패!");
-			// 로그인 실패 내용을 포워드로 다시 로그인 페이지에 보여주기
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-			dispatcher.forward(request, response);				
+		try {
+			
+			if(loginDao.validate(loginBean)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+				dispatcher.forward(request, response);
+				
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("id", customerID);
+				response.sendRedirect("login.jsp");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

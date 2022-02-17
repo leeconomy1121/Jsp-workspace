@@ -46,10 +46,10 @@
 			<div class="row">
 				<div class="col-lg-5 col-md-7 mx-auto">
 					<div class="bg-light p-5 mt-5">
-						<form action="customerController" method="post">
+						<form action="<%=request.getContextPath() %>/login" method="post">
 							<h3 class="text-center mb-3">로그인</h3>
-							<input type="text" class="form-control mb-3" name="userID" placeholder="아이디" maxlength="20" required>
-			          		<input type="password" class="form-control mb-3" name="userPassword" placeholder="비밀번호" maxlength="20" required>
+							<input type="text" class="form-control mb-3" name="customerID" placeholder="아이디" maxlength="20" required>
+			          		<input type="password" class="form-control mb-3" name="customerPassword" placeholder="비밀번호" maxlength="20" required>
 			          		<input type="submit" class="btn btn-primary form-control mb-3" value="로그인">
 						</form>
 					</div>
