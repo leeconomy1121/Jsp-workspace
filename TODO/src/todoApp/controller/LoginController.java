@@ -28,8 +28,6 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login/login.jsp");
 		dispatcher.forward(request, response);
 		
-		// 로그인 페이지르 이동
-		response.sendRedirect("login/login.jsp"); // 로그인 폴더 안의 로그인.jsp 페이지로 이동
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
