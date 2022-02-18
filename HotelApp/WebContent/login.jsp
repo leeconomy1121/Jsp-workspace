@@ -16,7 +16,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="main.jsp">
 				<img src="img/premium-icon-letter-h-5540593.png" alt="" width="30" height="30" class="d-inline-block align-text-top">
 				<span class="navbar-brand mb-0 h1">Hotels 4TEAM</span>
 			</a>

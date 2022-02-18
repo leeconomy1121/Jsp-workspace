@@ -1,4 +1,4 @@
-package customer;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +30,6 @@ public class LoginDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, loginBean.getCustomerID());
 			pstmt.setString(2, loginBean.getCustomerPassword());
-			System.out.println(rs);
 			
 			rs = pstmt.executeQuery();
 			

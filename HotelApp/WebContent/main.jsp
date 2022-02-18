@@ -31,8 +31,17 @@
 						<a class="dropdown-item" href="#">FAQ</a>
 					</div>
 				</div>
-				<a class="btn btn-primary mr-2" href="join.jsp">회원가입</a>
-				<a class="btn btn-primary mr-2" href="login.jsp">로그인</a>
+				<div class="dropdown mr-2">
+					<a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+						마이 페이지
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">회원 정보</a>
+						<a class="dropdown-item" href="#">예약 정보</a>
+						<a class="dropdown-item" href="#">내 문의</a>
+					</div>
+				</div>
+				<a class="btn btn-primary mr-2" href="logout.jsp">로그아웃</a>
 			</div>
 		</div>
 	</nav>
